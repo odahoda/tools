@@ -18,8 +18,12 @@ def ChecksumGenerate(FileName):
 def ChecksumVerify(Source, FileName, Control):
     Checksum = ChecksumGenerate(FileName)
     if Checksum != Control:
-        logging.error("%s:%s expected %s but see %s" % (Source, FileName,
-            Control, Checksum))
+        logging.error("%s:%s expected %s but see %s" % (
+            Source,
+            FileName,
+            Control,
+            Checksum
+        ))
         sys.exit(1)
 
 def fpart(Number):
@@ -75,6 +79,7 @@ def SfConfGenerate(FileName):
               <end>126</end>
             </keyRange>
             <overridingRootKey>69</overridingRootKey>
+            <sampleModes>3_LoopRelease</sampleModes>
             <wavetableId>1</wavetableId>
           </zone>
           <zone>
@@ -83,6 +88,7 @@ def SfConfGenerate(FileName):
               <end>126</end>
             </keyRange>
             <overridingRootKey>69</overridingRootKey>
+            <sampleModes>3_LoopRelease</sampleModes>
             <wavetableId>2</wavetableId>
           </zone>
         </zones>
@@ -97,6 +103,7 @@ def SfConfGenerate(FileName):
               <end>120</end>
             </keyRange>
             <overridingRootKey>69</overridingRootKey>
+            <sampleModes>3_LoopRelease</sampleModes>
             <wavetableId>3</wavetableId>
           </zone>
           <zone>
@@ -105,6 +112,7 @@ def SfConfGenerate(FileName):
               <end>126</end>
             </keyRange>
             <overridingRootKey>69</overridingRootKey>
+            <sampleModes>3_LoopRelease</sampleModes>
             <wavetableId>3</wavetableId>
           </zone>
         </zones>
@@ -203,12 +211,26 @@ def SfTest(Sf2, CsSf, CsConf, CsA4Wav, CsA5Wav):
 
 
 os.chdir('tmp')
-AudTest('test1.wav', 440, 'f3f1fd78ee2b4476ed03b90b56aeff16',
-  'cbf1dd8542ee1c8af63fdf1d3c851d9a', '5f2d52ecf007dde81a28197bde8fdc2e')
-AudTest('test2.wav', 880, '960702e0641e17cef647f41efc0e714f',
-  '697a61dee0e982a1d138ab38b3109dcd', 'b9a8c77bc409787188923f9785f1ff24')
+AudTest(
+    'test1.wav',
+    440,
+    'f3f1fd78ee2b4476ed03b90b56aeff16',
+    '73e139723a595beef1eaac81ebf38ed7',
+    '5f2d52ecf007dde81a28197bde8fdc2e'
+)
+AudTest(
+    'test2.wav',
+    880,
+    '960702e0641e17cef647f41efc0e714f',
+    'b13973b1996d76c6b70697dc500ae904',
+    'b9a8c77bc409787188923f9785f1ff24'
+)
 shutil.copyfile('test1.wav', 'test3.wav')
-SfTest('test.sf2', 'c5da17317905c65c4d6cc78f6ca62903',
-  'aa7446da6fe34fce65b6239380bcb523', 'f3f1fd78ee2b4476ed03b90b56aeff16',
-  '960702e0641e17cef647f41efc0e714f')
+SfTest(
+    'test.sf2',
+    'c5da17317905c65c4d6cc78f6ca62903',
+    '8d6ebdbe89d681611cc0ca38dfc92f73',
+    'f3f1fd78ee2b4476ed03b90b56aeff16',
+    '960702e0641e17cef647f41efc0e714f'
+)
 os.chdir('..')
